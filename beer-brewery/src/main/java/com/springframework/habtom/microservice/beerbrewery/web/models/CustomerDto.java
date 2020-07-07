@@ -1,4 +1,4 @@
-package com.springframework.habtom.microservice.beerbrewery.web.models.v2;
+package com.springframework.habtom.microservice.beerbrewery.web.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,19 +9,26 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.util.UUID;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDtov2 {
+public class CustomerDto {
+
     @NotNull
-    private UUID beerId;
+    private UUID id;
     @NotBlank
-    @Size(min = 3, max = 30)
-    private String beerName;
-    private BeerStyleEnum beerStyle;
+    @Size(min = 3, max = 100)
+    private String customerName;
     @Positive
-    private Long upc;
+    private Integer age;
+    @Positive
+    @NotNull
+    private BigDecimal salary;
+
+
 }
