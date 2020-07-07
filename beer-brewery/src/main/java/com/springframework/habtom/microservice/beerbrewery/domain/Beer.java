@@ -1,4 +1,4 @@
-package com.springframework.habtom.microservice.beerbrewery.web.models;
+package com.springframework.habtom.microservice.beerbrewery.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +11,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDTO {
+public class Beer {
     private UUID beerId;
     private String beerName;
     private String beerStyle;
     private Long upc;
-
-
-
-
 }

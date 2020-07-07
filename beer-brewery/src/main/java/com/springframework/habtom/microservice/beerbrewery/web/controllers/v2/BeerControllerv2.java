@@ -16,9 +16,11 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 @Validated
-@RequestMapping("/api/v2/beer")
+
 @RestController
+@RequestMapping("/api/v2/beer")
 public class BeerControllerv2 {
 
 
@@ -29,12 +31,12 @@ public class BeerControllerv2 {
     }
 
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDtov2> getBeer(@NotNull @PathVariable("beerId") UUID beerId) {
+    public ResponseEntity<BeerDtov2> getBeer(@PathVariable("beerId") UUID beerId) {
 
         return new ResponseEntity<>(beerServicev2.getBeerById(beerId), HttpStatus.OK);
     }
 
-    @PostMapping("/new")
+    @PostMapping
     public ResponseEntity saveBeer(@Valid @RequestBody BeerDtov2 beerDtov2) {
 
         BeerDtov2 beer = beerServicev2.save(beerDtov2);
@@ -58,13 +60,13 @@ public class BeerControllerv2 {
 
 
     }
-    public ResponseEntity<List> validatiionErrorHandler(ConstraintViolationException e){
-
-        List<String> errors= new ArrayList<>(e.getConstraintViolations().size());
-        e.getConstraintViolations().forEach(constraintViolation -> {
-            errors.add(constraintViolation.getPropertyPath()+" : "+constraintViolation.getMessage());
-        });
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-    }
+//    public ResponseEntity<List> validatiionErrorHandler(ConstraintViolationException e){
+//
+//        List<String> errors= new ArrayList<>(e.getConstraintViolations().size());
+//        e.getConstraintViolations().forEach(constraintViolation -> {
+//            errors.add(constraintViolation.getPropertyPath()+" : "+constraintViolation.getMessage());
+//        });
+//        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+//    }
 }
 

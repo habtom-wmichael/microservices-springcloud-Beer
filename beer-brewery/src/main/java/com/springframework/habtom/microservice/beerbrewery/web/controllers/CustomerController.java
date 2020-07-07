@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Validated
-@RequestMapping("/app/v1/customer")
-@RestController
 
+@RestController
+@RequestMapping("/app/v1/customer")
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
@@ -43,18 +43,18 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @DeleteMapping("/{customerId}")
-    public ResponseEntity handleUpdate(@NotNull @PathVariable("customerId") UUID customerId) {
+    public ResponseEntity handleDelete(@NotNull @PathVariable("customerId") UUID customerId) {
         customerService.deleteCustmer(customerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<List> validationErrorHandller(ConstraintViolationException e){
-        List<String> errors= new ArrayList<>(e.getConstraintViolations().size());
-
-        e.getConstraintViolations().forEach(constraintViolation -> {
-            errors.add(constraintViolation.getPropertyPath()+"  :  "+constraintViolation.getMessage());
-        });
-      return new ResponseEntity(errors,HttpStatus.BAD_REQUEST)  ;
-    }
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    public ResponseEntity<List> validationErrorHandller(ConstraintViolationException e){
+//        List<String> errors= new ArrayList<>(e.getConstraintViolations().size());
+//
+//        e.getConstraintViolations().forEach(constraintViolation -> {
+//            errors.add(constraintViolation.getPropertyPath()+"  :  "+constraintViolation.getMessage());
+//        });
+//      return new ResponseEntity(errors,HttpStatus.BAD_REQUEST)  ;
+//    }
 }
